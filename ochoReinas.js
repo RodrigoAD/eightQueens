@@ -1,10 +1,19 @@
 
-const selectedCells = [];
+let selectedCells = [];
 var queensRemaining = 8;
 
 $( document ).ready(function() {
 	$('#queensRemaining').html(queensRemaining)
 });
+
+const resetBoard = function () {
+	selectedCells = [];
+	queensRemaining = 8;
+	$('#queensRemaining').html(queensRemaining)
+	$('td.cell').removeClass('selected');
+	resetPaintBoard();
+	paintBoard(selectedCells);
+};
 
 const getNumber = function (string) {
 	return string.match(/\d+/)[0];
@@ -150,3 +159,8 @@ $('.cell').click(function () {
 
 	$('#queensRemaining').html(queensRemaining)
 })	
+
+
+$('#resetBoard').click(function () {
+	resetBoard();
+});
