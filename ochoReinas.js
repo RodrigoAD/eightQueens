@@ -14,12 +14,14 @@ const isSelectedCell = function (cellId) {
 	return $('#' + cellId).attr('class').includes('selected');
 };
 
-const isPink = function (cellId) {
-	return $('#' + cellId).attr('class').includes('pink-back');
+const isNotClickable = function (cellId) {
+	return $('#' + cellId).attr('class').includes('noClickable');
 };
 
 const paintBoard = function (selectedCells) {
 	// celda = row + col
+	const helpActive = $('#help').is(":checked");
+	console.log('AYUDA: ' + helpActive);
 	selectedCells.forEach(function (cellId) {
 		// Sacar su columna y fila y pintarlas
 		const col = cellId.split('')[1];
@@ -29,16 +31,23 @@ const paintBoard = function (selectedCells) {
 		const selectedColumnCells = getCellsInColumn(col);
 		const selectedDiagonalCells = getCellsInDigonal(cellId);
 		selectedRowCells.concat(selectedColumnCells).forEach(function (cell) {
-			$('#' + cell).addClass('pink-back')
+			if (helpActive) {
+				$('#' + cell).addClass('pink-back')
+			}
+			$('#' + cell).addClass('noClickable')
 		});
 		selectedDiagonalCells.forEach(function (cell) {
-			$('#' + cell).addClass('pink-back')
+			if (helpActive) {
+				$('#' + cell).addClass('pink-back')
+			}
+			$('#' + cell).addClass('noClickable')
 		});
 	});
 };
 
 const resetPaintBoard = function () {
 	$('td.cell').removeClass('pink-back');
+	$('td.cell').removeClass('noClickable')
 };
 
 const getCellsInRow = function (row) {
@@ -119,7 +128,7 @@ $('.cell').click(function () {
 		selectedCells.splice(index, 1);
 
 		queensRemaining++
-	} else if (isPink(cellId)) {
+	} else if (isNotClickable(cellId)) {
 		$('#message').html('<h4>Aqui no puedes dejarla :(</h4>');
 		setTimeout(function () {
 			$('#message').html('');
