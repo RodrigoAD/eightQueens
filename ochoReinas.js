@@ -64,8 +64,8 @@ const getCellsInDigonal = function (cell) {
 
 	function isLimit(cell) {
 		const cellSplited = cell.split('');
-		return cellSplited[0] === '1' || cellSplited[0] === '8' || cellSplited[1] === '1'
-		|| cellSplited[1] === '8';
+		return cellSplited[0] <= '1' || cellSplited[0] >= '8' || cellSplited[1] <= '1'
+		|| cellSplited[1] >= '8';
 	}
 
 	for (var i = 1; i < 8; i++) {
@@ -97,7 +97,6 @@ const getCellsInDigonal = function (cell) {
 		}
 	}
 
-	
 	return thisCells;
 };
 
@@ -107,9 +106,6 @@ $('.cell').hover(function () {
 	const row = $(this).parent().attr('class');
 
 	// console.log('CELDA: ' + cellId + ' COLUMNA: ' + col + ' FILA: ' + row);
-
-
-
 })
 
 $('.cell').click(function () {
@@ -125,6 +121,9 @@ $('.cell').click(function () {
 		queensRemaining++
 	} else if (isPink(cellId)) {
 		$('#message').html('<h4>Aqui no puedes dejarla :(</h4>');
+		setTimeout(function () {
+			$('#message').html('');
+		}, 1000);
 	} else {
 		// SE SELECCIONA
 
@@ -134,6 +133,9 @@ $('.cell').click(function () {
 		queensRemaining--
 	}
 
+	if (queensRemaining === 0) {
+		$('#message').html('<h3>LO HAS CONSEGUIDO!!</h3>');
+	}
 	resetPaintBoard();
 	paintBoard(selectedCells);
 

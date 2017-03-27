@@ -18,3 +18,7 @@ td.black-back {
 .selected {
 	background-color: green !important;
 }
+
+.messages {
+	text-align: center
+}
