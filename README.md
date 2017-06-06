@@ -1,4 +1,4 @@
-<h3>Las 8 reinas del tablero</h3>
+<a href="https://rodrigoad.github.io/eightQueens/"><h3>Las 8 reinas del tablero</h3></a>
 
 <p>Este es uno de esos juegos de ingenio considerados históricos. Es de esos
 enigmas que han hecho que más de una eminencia intelectual se rompiera la cabeza y
